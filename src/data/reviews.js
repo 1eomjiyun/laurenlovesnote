@@ -1,32 +1,29 @@
-// src/data/reviews.js
-import { reviews } from "../data/reviews";
+import React from "react";
+import { reviews } from "../data/reviews";   // <-- named import
+import ReactMarkdown from "react-markdown";
 
+export default function Reviews() {
+  return (
+    <div style={{ maxWidth: 860, margin: "0 auto", padding: "2rem" }}>
+      <h1>My Reviews</h1>
+      {reviews.map((review) => (
+        <div key={review.id} style={{ marginBottom: "20px" }}>
+          <h2>{review.title}</h2>
+          {review.date && (
+            <p><strong>Date:</strong> {review.date}</p>
+          )}
+          {/* Use .body to match the data file */}
+          <ReactMarkdown>{review.body}</ReactMarkdown>
 
-export const reviews = [
-  {
-    id: (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()),
-    title: "Point Pleasant Beach – Family Day Trip",
-    date: "2025-09-03",
-    location: "Point Pleasant, NJ",
-    rating: 5, // 1–5 stars
-    tags: ["beach", "family", "New Jersey"],
-    cover: "", // e.g. "/uploads/point-pleasant.jpg" if you add one later
-    link: "",  // e.g. a ticket or info link
-    body: `
-We spent the afternoon at **Point Pleasant Beach** and had a great time.
-
-**Pros**
-- Clean beach and boardwalk
-- Plenty of snacks + arcades for kids
-- Easy parking off-season
-
-**Cons**
-- Crowded on summer weekends
-- Badge prices add up
-
-**Tips**
-- Arrive before 10am for parking
-- Jenkinson’s Aquarium is great if it rains
-`
-  }
-];
+          {review.link && (
+            <p>
+              <a href={review.link} target="_blank" rel="noopener noreferrer">
+                Learn more
+              </a>
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
