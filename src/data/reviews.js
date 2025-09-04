@@ -1,5 +1,6 @@
 // src/data/reviews.js
-// Add new reviews by copying the object below and editing the fields.
+import { reviews } from "../data/reviews";
+
 
 export const reviews = [
   {
